@@ -499,7 +499,36 @@ scientists tend to do the following:
  if we're looking at the effects of climate change on speciation,
  our first test should hold temperature, precipitation, and other factors constant.
 
-3. *Compare to an oracle.*
+3. *Test with fake data.*
+ We can test our program against "fake" data that we have created to explicitly 
+ exhibit the feature we believe may be in our real data and which our program is 
+ designed to detect. The fake data should typically be created so the feature of 
+ interest is particular well defined so our program, when working correctly, 
+ should generate a clear and well defined output.   
+    As a concrete example, if we are writing a program to detect auditory 
+ signals in a noisey recording we could create a recording file containing a strong signal of know frequency
+ and amplitude with know onset time and duration and with a know amount of noise added. We would then process this
+ file with our program and look at the output. If our program is behaving well we should see
+ the pattern of results consistent with the known input. If we don't get the result we expect we need to 
+ we should check our program for bugs once we have confirmed that we really did make our artifical data the way we wanted.    
+    How you make the artifical data will depend on the nature of the data - in some instances it may be easier to 
+ generate signals in the lab. Alternatively you may make the fake data entirely with software. 
+ In our example you could use a signal generator and speaker to make real recordings or 
+ we could calculate a sin wave and add this to an array of random values.    
+    The benefit of this approach to testing is that you can create wide range of 
+ different inputs and  excercise a program extensively.   
+    You can think of testing with fake data as a systems level equivalent 
+ to unit tests that excerise components of system. Fake data has the added benefit that it allows 
+ you to develop a feel for the "power" of your system; that is, how strong must your signal be for you to be able to 
+ detect that is there. If you find that your system can only detect an unnaturally strong signal then you might want
+ to reconsider what you are doing. Remember to  keep fake data well marked as such so that you don't end 
+ up contaminating your real data set. 
+
+ 
+
+
+
+4. *Compare to an oracle.*
  A [test oracle](../../gloss.html#test-oracle) is something&mdash;experimental data,
  an older program whose results are trusted,
  or even a human expert&mdash;against which we can compare the results of our new program.
@@ -508,7 +537,7 @@ scientists tend to do the following:
  so that we can compare it with our new results as often as we like
  without re-running that program.
 
-4. *Check conservation laws.*
+5. *Check conservation laws.*
  Mass, energy, and other quantitites are conserved in physical systems,
  so they should be in programs as well.
  Similarly,
@@ -519,7 +548,7 @@ scientists tend to do the following:
  If "new" patients start appearing out of nowhere as we move through our pipeline,
  it's probably a sign that something is wrong.
 
-5. *Visualize.*
+6. *Visualize.*
  Data analysts frequently use simple visualizations to check both
  the science they're doing
  and the correctness of their code
